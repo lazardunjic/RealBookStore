@@ -1,5 +1,6 @@
 package com.urosdragojevic.realbookstore.controller;
 
+import com.urosdragojevic.realbookstore.audit.AuditLogger;
 import com.urosdragojevic.realbookstore.domain.Rating;
 import com.urosdragojevic.realbookstore.repository.RatingRepository;
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @Controller
 public class RatingsController {
     private static final Logger LOG = LoggerFactory.getLogger(RatingsController.class);
-
+    private static final AuditLogger auditLogger = AuditLogger.getAuditLogger(RatingsController.class);
     private RatingRepository ratingRepository;
 
     public RatingsController(RatingRepository ratingRepository) {
@@ -24,6 +25,7 @@ public class RatingsController {
     public String createOrUpdateRating(@ModelAttribute Rating rating) {
         rating.setUserId(1);
         ratingRepository.createOrUpdate(rating);
+        auditLogger.audit("Create or update rating on book with id: " + rating.getBookId() + " and rating: " + rating.getRating());
 
         return "redirect:/books/" + rating.getBookId();
     }
