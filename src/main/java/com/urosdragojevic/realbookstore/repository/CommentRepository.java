@@ -33,7 +33,7 @@ public class CommentRepository {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            LOG.error("Create new comment failed!", e);
+            LOG.error("Error while creating comment", e);
         }
     }
 
@@ -47,8 +47,9 @@ public class CommentRepository {
                 commentList.add(new Comment(rs.getInt(1), rs.getInt(2), rs.getString(3)));
             }
         } catch (SQLException e) {
-            LOG.error("Get all comment by book id failed", e);
+            LOG.error("Error fetching comments for bookId: " + bookId, e);
         }
+        
         return commentList;
     }
 }

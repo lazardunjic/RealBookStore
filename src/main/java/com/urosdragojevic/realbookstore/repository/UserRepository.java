@@ -34,7 +34,7 @@ public class UserRepository {
                 return new User(id, username1, password);
             }
         } catch (SQLException e) {
-            LOG.error("Find user by username failed!", e);
+            LOG.error("Finding user with username: " + username + " failed", e);
         }
         return null;
     }
@@ -58,7 +58,7 @@ public class UserRepository {
         ) {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            LOG.error("Delete user by userId failed!", e);
+            LOG.error("Failed to delete user by id: " + userId, e);
         }
     }
 }

@@ -35,7 +35,7 @@ public class GenreRepository {
                 genreList.add(new Genre(rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException e) {
-            LOG.error("Get all genre failed!", e);
+            LOG.error("Failed to fetch genres from database", e);
         }
         return genreList;
     }
@@ -50,7 +50,7 @@ public class GenreRepository {
                 genreList.add(new Genre(rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException e) {
-            LOG.error("Get all genre for book failed!", e);
+            LOG.error("Getting genres for book with id " + bookId + " failed", e);
         }
         return genreList;
     }

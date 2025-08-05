@@ -33,7 +33,7 @@ public class PersonRepository {
                 personList.add(createPersonFromResultSet(rs));
             }
         } catch (SQLException e) {
-            LOG.error("Get all persons failed!", e);
+            LOG.error("Failed to get all persons", e);
         }
         return personList;
     }
@@ -49,7 +49,7 @@ public class PersonRepository {
                 personList.add(createPersonFromResultSet(rs));
             }
         } catch(SQLException e){
-            LOG.error("Search persons by searchTerm failed!", e);
+            LOG.error("Failed to search persons by searchTerm: " + searchTerm, e);
         }
         return personList;
     }
@@ -63,7 +63,7 @@ public class PersonRepository {
                 return createPersonFromResultSet(rs);
             }
         } catch (SQLException e) {
-            LOG.error("Get person by id failed!", e);
+            LOG.error("Failed to get person by id: " + personId, e);
         }
 
         return null;
@@ -76,7 +76,7 @@ public class PersonRepository {
         ) {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            LOG.error("Delete person by id failed!", e);
+            LOG.error("Failed to delete person by id: " + personId, e);
         }
     }
 
@@ -101,7 +101,7 @@ public class PersonRepository {
             statement.setString(2, email);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOG.error("Update person failed!", e);
+            LOG.error("Failed to update person data", e);
         }
     }
 }
